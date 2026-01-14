@@ -1,0 +1,45 @@
+# Slooze Take-Home Assignment (Backend)
+
+This repository contains the backend implementation for the Slooze take-home challenge.
+The project focuses on authentication, role-based access control, and business logic
+for a food ordering system.
+
+## Tech Stack
+- Node.js
+- Express.js
+- Prisma ORM
+- SQLite
+- JWT Authentication
+
+## Roles
+- ADMIN
+- MANAGER
+- MEMBER
+
+## Features
+- JWT-based authentication
+- Role-based access control (RBAC) enforced at API level
+- Country-based restaurant filtering (India / America)
+- Restaurants and menu items
+- Order creation
+- Checkout and cancellation restricted to Admin and Manager
+
+## API Endpoints
+
+### Auth
+- POST `/auth/login`
+
+### Restaurants
+- GET `/restaurants` (protected)
+
+### Orders
+- POST `/orders`
+- POST `/orders/checkout` (Admin, Manager only)
+- POST `/orders/cancel` (Admin, Manager only)
+
+## Running the Project Locally
+
+```bash
+npm install
+npx prisma migrate reset
+node server.js
