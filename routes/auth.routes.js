@@ -12,11 +12,7 @@ const prisma = new
     return res.status(401).json({ message: "Invalid credentials" });
   }
 
-  const token = jwt.sign(
-    {
-      id: user.id,
-      role: user.role,
-      country: user.country,
+  const token = jwt.sign
     },
     "SECRET_KEY",
     { expiresIn: "1h" }
