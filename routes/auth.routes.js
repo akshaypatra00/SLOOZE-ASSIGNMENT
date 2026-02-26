@@ -1,9 +1,24 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const jwt = require
-const prisma = new
+const jwt = require("jsonwebtoken");
+const { PrismaClient } = require("@prisma/client");
 
-// POST /auth/login: "Email an
+const prisma = new PrismaClient();
+const router = express.Router();
+
+// POST /auth/login
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: "Email and password required" });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (!user) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
 
@@ -12,7 +27,11 @@ const prisma = new
     return res.status(401).json({ message: "Invalid credentials" });
   }
 
-  const token = jwt.sign
+  const token = jwt.sign(
+    {
+      id: user.id,
+      role: user.role,
+      country: user.country,
     },
     "SECRET_KEY",
     { expiresIn: "1h" }
