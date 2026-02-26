@@ -3,12 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require
 const prisma = new
 
-// POST /auth/login: "Email and password 
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
-
-  if (!user) {
+// POST /auth/login: "Email an
     return res.status(401).json({ message: "Invalid credentials" });
   }
 
