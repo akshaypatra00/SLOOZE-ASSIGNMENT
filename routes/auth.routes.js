@@ -4,10 +4,7 @@ const jwt = require
 const prisma = new
 
 // POST /auth/login
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
+router.post("/login", async (req, 
     return res.status(400).json({ message: "Email and password required" });
   }
 
